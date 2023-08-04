@@ -1,8 +1,9 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
-public class First {
+public class CreateTable {
     public static void main(String[] args) {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); // Make sure to use the correct driver class name
@@ -14,11 +15,18 @@ public class First {
             // Use the connection to execute SQL queries or perform database operations
             Connection connection = DriverManager.getConnection(url, username, password);
 
+            //Create a Query
+            String q="create table table1(tId int(20) primary key auto_increment,tName varchar(200) not null,tCity varchar(400))";
 
-//            connection.close(); // Close the connection when done
+            Statement statement= connection.createStatement();
+
+            statement.executeUpdate(q);
+
+            System.out.println("table created in base");
+
+
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
-    }
-
+}
